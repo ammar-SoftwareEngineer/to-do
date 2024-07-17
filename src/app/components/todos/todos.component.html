@@ -1,0 +1,72 @@
+<section class="">
+  <div class="container">
+    <div class="head text-center py-4">
+      <h1 class="text-primary pb-2 fw-semibold">{{ Title }}</h1>
+      <img
+        width="400"
+        height="300"
+        class="rounded-4"
+        [src]="imgSrc"
+        alt="task img"
+      />
+    </div>
+    <div class="row gx-2">
+      <div class="col-lg-10 col-md-10 col-9">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="New Task"
+          [(ngModel)]="newToDo.title"
+        />
+      </div>
+      <div class="col-lg-2 col-md-2 col-3">
+        <button class="btn btn-primary" (click)="createToDos()">
+          Add Task
+        </button>
+      </div>
+    </div>
+
+    <!-- @if (isAvalible) { -->
+    <div class="table-responsive pt-4">
+      <table class="table align-middle table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">item</th>
+            <th scope="col">Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of todos; track item.id) {
+          <tr>
+            <th scope="row">{{ item.id }}</th>
+            <td>
+              <div class="check-todo">
+                <input
+                  type="checkbox"
+                  class="form-check-input me-2"
+                  name="check"
+                  [(ngModel)]="item.completed"
+                />
+                <span
+                  class="fw-semibold"
+                  [ngClass]="{ 'text-decoration-line-through': item.completed }"
+                  [routerLink]="['/todos', item.id]"
+                  >{{ item.title }}</span
+                >
+              </div>
+            </td>
+
+            <td>
+              <button class="btn py-1" (click)="deleteToDos(item.id)">
+                <i class="fa-solid fa-trash text-danger"></i>
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <!-- } -->
+  </div>
+</section>

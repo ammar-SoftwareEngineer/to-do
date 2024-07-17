@@ -1,0 +1,64 @@
+@if(todo){
+<section class="">
+  <div class="container">
+    <div class="head text-center py-4">
+      <h1 class="text-primary pb-2 fw-semibold">{{ Title }}</h1>
+      <img
+        width="400"
+        height="300"
+        class="rounded-4"
+        [src]="imgSrc"
+        alt="task img"
+      />
+    </div>
+    <div>
+      <h2 class="text-success pb-2 fw-semibold">Task Title:{{ todo.title }}</h2>
+      <p class="text-success pb-2 fw-semibold">
+        Task Completed: {{ todo.completed }}
+      </p>
+    </div>
+
+    <form action="" (ngSubmit)="updateToDos()" #form="ngForm">
+      <div class="row gx-2 gy-4">
+        <div class="col-lg-12 col-md-12 col-12">
+          <div class="d-flex gap-3 align-items-center">
+            <label for="task" class="fs-5">Task:</label>
+            <input
+              type="text"
+              id="task"
+              class="form-control"
+              name="title"
+              placeholder="update Task"
+              [(ngModel)]="todo.title"
+              required
+              #input="ngModel"
+              pattern="[A-z-a-z]{3,}"
+              [ngClass]="{
+                'is-invalid': (input.touched || input.dirty) && input.invalid
+              }"
+            />
+          </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-12">
+          <div class="d-flex gap-3 align-items-center">
+            <label for="check" class="fs-5">Completed:</label>
+            <input
+              type="checkbox"
+              id="check"
+              name="check"
+              class="form-check-input"
+              [(ngModel)]="todo.completed"
+            />
+          </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-12">
+          <button class="btn btn-primary w-100" [disabled]="form.invalid">
+            update Task
+          </button>
+        </div>
+      </div>
+    </form>
+    <span class="mt-5">{{ input.errors | json }}</span>
+  </div>
+</section>
+}
